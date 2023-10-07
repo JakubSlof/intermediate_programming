@@ -125,7 +125,7 @@ int main() {
     pyramid(30);
     std::cout << std::endl;
     pyramid1(10);
-    rectangle(10,10);
+    rectangle(10,5);
     return 0;
     
     
