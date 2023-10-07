@@ -20,6 +20,63 @@ int sum(int a, int b) {
     return a + b;
 }
 
+int sub(int a, int b ){
+    return a - b;
+} 
+
+void stars( int number_of_stars){
+for (int i = 0; i < number_of_stars; i++){
+    std::cout << "*";
+
+}
+}
+
+void pyramid(int number_of_lines){
+    std::string mezera = " ";
+    std::string hvezda = "*";
+    int counter = 1;
+    int c = number_of_lines;
+    for(int i = 0; i < number_of_lines;i++){
+        for(int m = 0; m < c ; m++){
+            std::cout << mezera;    
+        }
+        c = c - 1;
+        for(int h = 0; h < counter; h++){
+            std::cout << hvezda;  
+        }
+        counter = counter + 2;
+        std::cout << std::endl;
+    }   
+} 
+
+void pyramid1(int number_of_lines){
+    std::string hvezda = "*";
+    int counter = 0;
+    for(int i = 0; i < number_of_lines;i++){
+        for(int h = 0; h < counter; h++){
+            std::cout << hvezda;  
+        }
+        counter = counter +1;
+        std::cout << std::endl;
+    }
+    for(int i = 0; i < number_of_lines;i++){
+        for(int h = 0; h < counter; h++){
+            std::cout << hvezda;  
+        }
+        counter = counter -1;
+        std::cout << std::endl;
+    }
+}
+
+void rectangle(int number_of_lines, int line_lenght){
+    std::string hvezda = "*";
+    for(int i = 0; i < number_of_lines;i++){
+        for(int h = 0; h < line_lenght; h++){
+            std::cout << hvezda;  
+        }
+        std::cout << std::endl;
+    }
+}
 int a = 0;
 
 void scope() {
@@ -62,5 +119,15 @@ int main() {
     std::cout << a << std::endl;
     scope();
     std::cout << a << std::endl;
+    std::cout << sub(2,9) << std::endl;
+    stars(10);
+    std::cout << std::endl;
+    pyramid(30);
+    std::cout << std::endl;
+    pyramid1(10);
+    rectangle(10,10);
     return 0;
+    
+    
+
 }
