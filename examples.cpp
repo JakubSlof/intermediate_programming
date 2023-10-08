@@ -33,7 +33,7 @@ for (int i = 0; i < number_of_stars; i++){
 
 void pyramid(int number_of_lines){
     int counter = 1;
-    int c = number_of_lines;
+    int c = number_of_lines - 1;
     for(int i = 0; i < number_of_lines;i++){
         for(int m = 0; m < c ; m++){
             std::cout << " ";    
@@ -48,29 +48,29 @@ void pyramid(int number_of_lines){
 } 
 
 void pyramid1(int number_of_lines){
-    std::string hvezda = "*";
     int counter = 0;
-    for(int i = 0; i < number_of_lines;i++){
+    for(int i = 0; i < (number_of_lines/2) + 1; i++){
         for(int h = 0; h < counter; h++){
-            std::cout << hvezda;  
+            std::cout << "*";  
         }
-        counter = counter +1;
+        counter ++;
+        if(counter > 1){
         std::cout << std::endl;
-    }
-    for(int i = 0; i < number_of_lines;i++){
-        for(int h = 0; h < counter; h++){
-            std::cout << hvezda;  
         }
-        counter = counter -1;
+    }
+    for(int i = 0; i < 1 + number_of_lines/2;i++){
+        for(int h = 0; h < counter; h++){
+            std::cout << "*";  
+        }
+        counter = counter - 1;
         std::cout << std::endl;
     }
 }
 
 void rectangle(int number_of_lines, int line_lenght){
-    std::string hvezda = "*";
     for(int i = 0; i < number_of_lines;i++){
         for(int h = 0; h < line_lenght; h++){
-            std::cout << hvezda;  
+            std::cout << "*";  
         }
         std::cout << std::endl;
     }
@@ -120,10 +120,14 @@ int main() {
     std::cout << sub(2,9) << std::endl;
     stars(10);
     std::cout << std::endl;
-    pyramid(30);
     std::cout << std::endl;
-    pyramid1(10);
-    rectangle(10,5);
+    rectangle(4,3);
+    std::cout << std::endl;
+    pyramid1(3); 
+    std::cout << std::endl;
+    pyramid(2);
+   
+    
     return 0;
     
     
