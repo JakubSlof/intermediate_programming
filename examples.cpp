@@ -32,17 +32,15 @@ for (int i = 0; i < number_of_stars; i++){
 }
 
 void pyramid(int number_of_lines){
-    std::string mezera = " ";
-    std::string hvezda = "*";
     int counter = 1;
     int c = number_of_lines;
     for(int i = 0; i < number_of_lines;i++){
         for(int m = 0; m < c ; m++){
-            std::cout << mezera;    
+            std::cout << " ";    
         }
         c = c - 1;
         for(int h = 0; h < counter; h++){
-            std::cout << hvezda;  
+            std::cout << "*";  
         }
         counter = counter + 2;
         std::cout << std::endl;
