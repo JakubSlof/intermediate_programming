@@ -29,6 +29,6 @@ std::cout << "Sum of vectors: ("<<c.v<<" , "<<c.w <<" ,"<<c.x<<" , "<<c.y<<" , "
 Vector5 d = diff(vector_a,vector_b);
 std::cout << "Difference of vectors : ("<<d.v<<" , "<<d.w <<" , "<<d.y<<" , "<<d.z<<")"<< std::endl;  
 Vector5 e = hem(vector_a,vector_b);
-std::cout << "Hamming distance : ("<<e.v<<" , "<<e.w <<" , "<<e.y<<" , "<<e.z<<")"<< std::endl; 
+std::cout << "Hamming distance : ("<<e.v+e.w+e.x+e.y+e.z<<")"<< std::endl; 
 
 }
