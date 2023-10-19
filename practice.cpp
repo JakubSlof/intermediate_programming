@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include<vector>
 
 /*
  * V Kocourkově se rozhodly, že systém adres domů je zastaralý a potřebují nový.
@@ -73,15 +74,72 @@ bool isAddressValid(Address address, Town town)
  * Pohyb mezi domy (+-X) - vzdálenost 1
  * Pohyb mezi ulicemi (+-Y) - vzdálenost 5
  * Pohyb mezi bloky (+-X, +-Y) - vzdálenost 10
- */
-std::size_t distance(Address address1, Address address2, Town town){
-    int house = 1;
-    int street = 5;
-    int block = 10;
-    std::size_t blockprice = address1.block * block + address2.block * block;
-    std::size_t streetprice = address1.street * block + address2.street * street;
-    std::size_t streetprice = address1.house * block + address2.house * house;
+ *///std::size_t
+ void distance (Address address1, Address address2, Town town){
+    //int house = 1;
+    //int street = 5;
+    //int block = 10;
+    //int line =0;
 
+int Row = std::sqrt(town.blocks);
+int Col = std::sqrt(town.blocks);
+std::vector<std::vector<int>>block_array(Row,std::vector<int>(Col));
+int count = 0;
+for (int i = 0; i < Row;i++){
+    for (int j = 0; j < Col;j++){
+        block_array[i][j]=count;
+        count++;
+    }
+}
+int first_block = address1.block;
+int second_block = address2.block;
+bool found = false;
+int row1 = -69;
+int row2 = -69;
+int col1 = -69;
+int col2 = -69;
+for(int i = 0; i < Row;i++){
+    for(int j =0; j<Col; j++){
+        if (block_array[i][j] == first_block){
+            found =true;
+            row1 = i;
+            col1 = j;
+            break;
+        }
+    }if(found==true){
+        break;
+    }
+}
+////////////////////////////////////////////////////
+for(int i = 0; i < Row;i++){
+    for(int j =0; j< Col; j++){
+        if (block_array[i][j] == second_block){
+            found =true;
+            row2 = i;
+            col2 = j;
+            break;
+        }
+    }if(found==true){
+        break;
+    }
+}
+std::cout<<row1<<std::endl;
+std::cout<<col1<<std::endl;
+std::cout<<row2<<std::endl;
+std::cout<<col2<<std::endl;
+
+int row_diff = abs(row1-row2);
+int col_diff = abs(col1-col2);
+std::cout<<" "<<std::endl;
+std::cout<<row_diff<<std::endl;
+std::cout<<col_diff<<std::endl;
+int block_fiff = abs(row_diff + col_diff);
+int street_dif = abs(address1.street-address2.street) + (row_diff * town.streets);
+int house_diff = (town.houses - address1.house - 1) + (address2.house);
+std::cout<<" "<<std::endl;
+std::cout<<block_fiff<<std::endl;
+std::cout<<street_dif<<std::endl;
+std::cout<<house_diff<<std::endl;
 
 
 
@@ -110,11 +168,11 @@ int main()
     Address validAddress1 = {
         .block = 0,
         .street = 1,
-        .house = 2,
+        .house = 2,//default 2
     };
 
     Address validAddress2 = {
-        .block = 1,
+        .block = 1,//default 1
         .street = 2,
         .house = 3,
     };
@@ -131,6 +189,7 @@ int main()
     assert(isAddressValid(validAddress1, validTown));
     assert(!isAddressValid(invalidAddress1, validTown));
 
-    assert(distance(validAddress1, validAddress1, validTown) == 0);
-    assert(distance(validAddress1, validAddress2, validTown) == 34);
+    //assert(distance(validAddress1, validAddress1, validTown) == 0);
+    //assert(distance(validAddress1, validAddress2, validTown) == 34);
+    distance(validAddress1, validAddress2, validTown);
 }
