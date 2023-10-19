@@ -79,11 +79,22 @@ bool isAddressValid(Address address, Town town)
     //int house = 1;
     //int street = 5;
     //int block = 10;
-    //int line =0;
-
+if(address1.block>address2.block){
+int c = address2.block;
+address2.block = address1.block;  
+address1.block = c;
+}
+if(address1.block == address2.block){
+    if(address1.house>address2.house){
+        int c = address2.block;
+        address2.block = address1.block;  
+        address1.block = c;
+    }
+}
 int Row = std::sqrt(town.blocks);
 int Col = std::sqrt(town.blocks);
 std::vector<std::vector<int>>block_array(Row,std::vector<int>(Col));
+//int block_array[Row][Col]; //nefunguje protoze kompiler
 int count = 0;
 for (int i = 0; i < Row;i++){
     for (int j = 0; j < Col;j++){
@@ -133,14 +144,15 @@ int col_diff = abs(col1-col2);
 std::cout<<" "<<std::endl;
 std::cout<<row_diff<<std::endl;
 std::cout<<col_diff<<std::endl;
-int block_fiff = abs(row_diff + col_diff);
+int block_diff = abs(row_diff + col_diff);
 int street_dif = abs(address1.street-address2.street) + (row_diff * town.streets);
-int house_diff = (town.houses - address1.house - 1) + (address2.house);
+int house_diff = (town.houses - address1.house - 1) + (address2.house)+(col_diff-1)*(town.houses-1);
 std::cout<<" "<<std::endl;
-std::cout<<block_fiff<<std::endl;
+std::cout<<block_diff<<std::endl;
 std::cout<<street_dif<<std::endl;
 std::cout<<house_diff<<std::endl;
-
+int expensivnes = block_diff * 10 + street_dif * 5 + house_diff;
+std::cout<<expensivnes<<std::endl;
 
 
 }
