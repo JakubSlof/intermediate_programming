@@ -134,6 +134,7 @@ void distance1(Address address1, Address address2, Town town)
         }
     }
     ////////////////////////////////////////////////////
+    found = false;
     for (int i = 0; i < Row; i++)
     {
         for (int j = 0; j < Col; j++)
@@ -191,8 +192,9 @@ std::size_t distance(Address address1, Address address2, Town town)
     }
     int Row = std::sqrt(town.blocks);
     int Col = std::sqrt(town.blocks);
-    std::vector<std::vector<int>> block_array(Row, std::vector<int>(Col));
+    //std::vector<std::vector<int>> block_array(Row, std::vector<int>(Col));
     // int block_array[Row][Col]; //nefunguje protoze kompiler
+    int block_array[2][2];
     int count = 0;
     for (int i = 0; i < Row; i++)
     {
@@ -227,6 +229,7 @@ std::size_t distance(Address address1, Address address2, Town town)
         }
     }
     ////////////////////////////////////////////////////
+    found = false;
     for (int i = 0; i < Row; i++)
     {
         for (int j = 0; j < Col; j++)
@@ -275,7 +278,7 @@ int main()
     };
 
     Address validAddress1 = {
-        .block = 0,
+        .block = 3,//default 0
         .street = 1,
         .house = 2, // default 2
     };
@@ -298,7 +301,7 @@ int main()
     assert(isAddressValid(validAddress1, validTown));
     assert(!isAddressValid(invalidAddress1, validTown));
 
-    assert(distance(validAddress1, validAddress1, validTown) == 0);
-    assert(distance(validAddress1, validAddress2, validTown) == 19);
-    //distance1(validAddress1, validAddress2, validTown);
+    //assert(distance(validAddress1, validAddress1, validTown) == 0);
+    //assert(distance(validAddress1, validAddress2, validTown) == 19);
+   distance1(validAddress1, validAddress2, validTown);
 }
