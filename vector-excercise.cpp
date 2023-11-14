@@ -31,16 +31,24 @@ using Instructions = std::vector<Move>;
  * 3. Napište overload funkce move, která dostane pokyny typu Instructions a skladiště typu Storage a provede všechny přesuny.
  */
 
-void show(const Storage& storage);
-void move(const Move& move, Storage& storage);
-void move(const Instructions& instructions, Storage& storage);
+void show(const Storage& storage){
+    for(std::size_t i =0; i<storage.size();i++){    
+    for(std::size_t j =0; j< storage[i].size();j++){
+        std::cout<<storage[i][j];
+        int Imax = 
+    }
+    std::cout <<std::endl;
+    }
+}
+// void move(const Move& move, Storage& storage);
+// void move(const Instructions& instructions, Storage& storage);
 
 int main()
 {
     Storage storage = {
         { 0, 1, 2, 3, 4, 5 },
-        {},
-        {}
+        {2},
+        {4}
     };
 
     Instructions instructions = {
@@ -54,8 +62,8 @@ int main()
     };
 
     show(storage);
-    move(instructions, storage);
-    show(storage);
+    //move(instructions, storage);
+    //show(storage);
 
     return 0;
 }

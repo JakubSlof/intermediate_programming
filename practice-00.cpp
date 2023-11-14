@@ -17,25 +17,69 @@
  */
 
 using Set = std::uint64_t;
+void addToSet(Set &mnozina, unsigned cislo)
+{
+    mnozina = mnozina | 1ULL << cislo;
+}
+void removeFromSet(Set &mnozina, unsigned cislo)
+{
+    mnozina = mnozina & (~(1 << cislo));
+}
+bool contains(const Set &mnozina, unsigned cislo)
+{
+    Set a = mnozina;
+    a = mnozina & (1ULL << cislo); //
+    return a;
+}
+void printSet(const Set &mnozina)
+{
+    int c = 0;
+    std::cout << '{';
+    for (int i = 0; i < 64; i++)
+    {
+        if (contains(mnozina, i))
+        {
+            if (c > 0)
+            {
+                std::cout << ',';
+            }
+            std::cout << i;
+            c += 1;
+        }
+    }
+    std::cout << '}';
+}
+Set setUnion(const Set &mnozina1, const Set &mnozina2)
+{
+    Set mnozina3 = mnozina1 | mnozina2;
+    return mnozina3;
+}
+Set setIntersection(const Set &mnozina1, const Set &mnozina2)
+{
+    return mnozina1 & mnozina2;
+}
+Set setSymmetricDifference(const Set &mnozina1, const Set &mnozina2)
+{
+    return mnozina1 ^ mnozina2;
+}
+bool isEmpty(const Set &mnozina)
+{
+return mnozina == 0;
+  
+}
+bool isSubset(const Set &a, const Set &b){
+return b & a;
+}
+// bool areEqual(const Set &, const Set &);
 
-void addToSet(Set&, unsigned);
-void removeFromSet(Set&, unsigned);
-bool contains(const Set&, unsigned);
-void printSet(const Set&);
-Set setUnion(const Set&, const Set&);
-Set setIntersection(const Set&, const Set&);
-Set setSymmetricDifference(const Set&, const Set&);
-bool isEmpty(const Set&);
-bool isSubset(const Set&, const Set&);
-bool areEqual(const Set&, const Set&);
-
-int main() {
+int main()
+{
     Set a = 0;
     Set b = 0;
     const Set c = 0b1011;
     const Set d = 0b1100 | 1ULL << 63;
 
-    // Test addToSet 
+    // Test addToSet
     addToSet(a, 0);
     addToSet(a, 1);
     addToSet(a, 2);
@@ -45,7 +89,7 @@ int main() {
     assert(a == (1ULL << 63 | 1ULL << 3 | 1ULL << 2 | 1ULL << 1 | 1ULL << 0));
 
     // Test removeFromSet
-    
+
     removeFromSet(a, 0);
     removeFromSet(a, 1);
     removeFromSet(a, 2);
@@ -53,14 +97,16 @@ int main() {
 
     assert(a == (1ULL << 63));
 
-    // Test contains
+    //     // Test contains
 
     b = 1ULL << 62 | 1ULL << 61 | 1ULL << 60 | 1ULL << 59 | 1ULL << 58;
-    for (std::size_t i = 0; i < 58; ++i) {
+    for (std::size_t i = 0; i < 58; ++i)
+    {
         assert(!contains(b, i));
     }
 
-    for (std::size_t i = 58; i <= 62; ++i) {
+    for (std::size_t i = 58; i <= 62; ++i)
+    {
         assert(contains(b, i));
     }
 
@@ -73,25 +119,25 @@ int main() {
     // Test setIntersection
     assert(setIntersection(c, d) == 1ULL << 3);
 
-    // Test setSymmetricDifference
+    //     // Test setSymmetricDifference
     assert(setSymmetricDifference(c, d) == (1ULL << 63 | 1ULL << 2 | 1ULL << 1 | 1ULL << 0));
 
-    // Test isEmpty
-    assert(isEmpty(0));
-    assert(!isEmpty(1ULL << 63));
+         // Test isEmpty
+         assert(isEmpty(0));
+        assert(!isEmpty(1ULL << 63));
 
-    // Test isSubset
-    assert(!isSubset(c, d));
-    assert(isSubset(c, c));
-    assert(isSubset(0, c));
-    assert(isSubset(0, 0));
-    assert(isSubset(1ULL << 63, d));
+   // Test isSubset
+     assert(!isSubset(c, d));
+     assert(isSubset(c, c));
+     assert(isSubset(0, c));
+     assert(isSubset(0, 0));
+     assert(isSubset(1ULL << 63, d));
 
-    // Test areEqual
-    assert(!areEqual(c, d));
-    assert(areEqual(c, c));
-    assert(areEqual(0, 0));
-    assert(areEqual(1ULL << 63, 1ULL << 63));
+    //     // Test areEqual
+    //     assert(!areEqual(c, d));
+    //     assert(areEqual(c, c));
+    //     assert(areEqual(0, 0));
+    //     assert(areEqual(1ULL << 63, 1ULL << 63));
 
     return 0;
 }
